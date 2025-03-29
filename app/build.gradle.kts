@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.recyclerview)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.androidx.core.ktx)
