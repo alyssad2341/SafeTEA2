@@ -12,7 +12,8 @@ import com.example.safetea2.model.University
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import android.content.Intent
+import android.widget.Button
 
 class SearchResultsActivity : AppCompatActivity() {
 
@@ -39,6 +40,13 @@ class SearchResultsActivity : AppCompatActivity() {
 
         val resultsTextView = findViewById<TextView>(R.id.resultsTextView)
         resultsTextView.text = "Results for: $searchQuery"
+
+        val homeButton = findViewById<Button>(R.id.backbutton)
+
+        homeButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun fetchUniversities(query: String) {
