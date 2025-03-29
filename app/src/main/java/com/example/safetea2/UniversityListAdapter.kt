@@ -1,5 +1,6 @@
 package com.example.safetea2
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,13 @@ class UniversityListAdapter(private var universities: List<University>) :
         val university = universities[position]
         holder.nameTextView.text = university.name
         holder.countryTextView.text = university.country
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, UniversityDetailsActivity::class.java)
+            intent.putExtra("UNIVERSITY_NAME", university.name)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = universities.size
