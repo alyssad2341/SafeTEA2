@@ -28,5 +28,5 @@
             android:exported="false"
             android:label="Search Results" />
     </application>
-
+<!-- update -->
 </manifest>
