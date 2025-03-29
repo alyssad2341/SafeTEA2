@@ -21,7 +21,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity
+            android:name=".SearchResultsActivity"
+            android:exported="false"
+            android:label="Search Results" />
     </application>
 
 </manifest>
