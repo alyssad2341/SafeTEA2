@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.safetea2.databinding.ActivityMainBinding
 import android.widget.Button
 import android.content.Intent
+import com.example.safetea2.ui.dashboard.DashboardFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,31 +25,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
 
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+        )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
+        // Search Button Functionality (Moved Outside setOnItemSelectedListener)
         val searchView = findViewById<SearchView>(R.id.searchView)
         val searchButton = findViewById<Button>(R.id.spillbutton)
 
         searchButton.setOnClickListener {
             val query = searchView.query.toString().trim()
-            if(query.isNotEmpty()){
+            if (query.isNotEmpty()) {
                 val intent = Intent(this, SearchResultsActivity::class.java)
                 intent.putExtra("SEARCH_QUERY", query)
                 startActivity(intent)
             }
         }
-
     }
 }
