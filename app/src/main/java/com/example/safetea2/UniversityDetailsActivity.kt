@@ -15,4 +15,5 @@ class UniversityDetailsActivity : AppCompatActivity() {
         val universityNameTextView = findViewById<TextView>(R.id.universityNameTextView)
         universityNameTextView.text = universityName
     }
+    //updated
 }
