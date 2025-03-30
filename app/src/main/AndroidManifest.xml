@@ -30,6 +30,7 @@
             android:name=".SearchResultsActivity"
             android:exported="false"
             android:label="Search Results" />
+        <activity android:name=".UniversityDetailsActivity"/>
     </application>
 <!-- update -->
 </manifest>
