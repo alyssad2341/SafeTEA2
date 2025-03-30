@@ -11,5 +11,6 @@ data class Result(
 data class Components(
     val city: String?,
     val state: String?,
-    val country: String?
+    val country: String?,
+    val state_code: String?
 )

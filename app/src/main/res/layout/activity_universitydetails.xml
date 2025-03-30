@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UniversityDetailsActivity">
 
+    <!-- University Name -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/universityNameTextView"
         android:layout_width="wrap_content"
@@ -16,32 +17,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="80dp"/>
 
+    <!-- City & State -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/universityCityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="City Name"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:text="City, State"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/universityNameTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/universityNameTextView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
 
+    <!-- Crime Data -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/crimeStatsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Crime Data: Loading..."
+        android:textSize="16sp"
+        android:textColor="#D32F2F"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/universityCityTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Save Button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Save University"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/crimeStatsTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/universityNameTextView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
+    <!-- News Articles -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newsRecyclerView"
         android:layout_width="0dp"
