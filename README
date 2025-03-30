@@ -1,0 +1,47 @@
+# Student SafeTEA
+
+## Developers
+- **Alyssa Duranovic**
+- **Shreeya Kar**
+
+## AI Used
+- **Gemini**
+- **ChatGPT**
+
+## APIs Used
+- **NewsAPI**
+- **OpenCage API**
+- **HipoLabs API**
+
+## How to Use the App
+
+1. **Search for Universities**:  
+   You can search for universities either by their **name** or **location**. The search functionality will display relevant universities based on your query.
+
+2. **Save a University**:  
+   Once you find the university you're interested in, you can view news articles featuring that university or check the **"Save University"** checkbox. This will save the university to your **Dashboard**.
+
+3. **Access the Dashboard**:  
+   To access your saved universities, click on the **Dashboard** icon in the bottom navigation bar. This will take you to a list of all universities you have saved. To remove a university from your list, simply uncheck the **Save University** checkbox.
+
+4. **Scroll**:  
+   You can click and drag to scroll through the universities you have saved on your Dashboard or the news articles.
+
+5. **Notification Tab**:  
+   Please note that the **Notification Tab** is not functional and should not be used.
+
+## Test the App
+
+To test the app, you can use this link to launch it directly in your browser (no other downloads or imports are necessary):
+
+[Try the App Now](https://appetize.io/app/b_x7tdttin36o527h5445ygwyjpy)
+
+---
+
+### **Built With**
+- Android Studio
+- Kotlin
+- Retrofit for API calls
+- RecyclerView for displaying data
+
+For any issues or questions, feel free to reach out to the developers!
