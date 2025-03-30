@@ -1,22 +1,12 @@
 package com.example.safetea2
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safetea2.api.RetrofitInstance
 import com.example.safetea2.model.University
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import android.content.Intent
-import android.widget.Button
-import android.content.Context
 import android.content.SharedPreferences
-import com.example.safetea2.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -41,16 +31,17 @@ class SavedToDashboard : AppCompatActivity() {
         universityAdapter = UniversityListAdapter(savedUniversities.map { University(it) })
         recyclerView.adapter = universityAdapter
 
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigationView.selectedItemId = R.id.navigation_dashboard
 
-        navView.setOnItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
             val handled = when (item.itemId) {
                 R.id.navigation_home -> {
                     startActivity(Intent(this, MainActivity::class.java))
                     true
                 }
                 R.id.navigation_dashboard -> {
-                    // Redirect to SavedUniversitiesActivity when Dashboard is clicked
+                    startActivity(Intent(this, SavedToDashboard::class.java))
                     true
                 }
                 else -> false
@@ -59,7 +50,6 @@ class SavedToDashboard : AppCompatActivity() {
         }
 
     }
-
 
     private fun getSavedUniversities(): List<String> {
         val json = sharedPreferences.getString("SAVED_UNIVERSITIES", "[]")

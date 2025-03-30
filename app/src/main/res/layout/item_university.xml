@@ -15,12 +15,5 @@
         android:textStyle="bold"
         android:textColor="@android:color/black" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/universityCountry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Country"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray" />
 
 </LinearLayout>

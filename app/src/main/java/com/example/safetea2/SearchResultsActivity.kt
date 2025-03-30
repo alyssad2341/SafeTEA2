@@ -14,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.content.Intent
 import android.widget.Button
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SearchResultsActivity : AppCompatActivity() {
 
@@ -36,7 +37,22 @@ class SearchResultsActivity : AppCompatActivity() {
         if(searchQuery.isNotEmpty()){
             fetchUniversities(searchQuery)
         }
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
+        navView.setOnItemSelectedListener { item ->
+            val handled = when (item.itemId) {
+                R.id.navigation_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    startActivity(Intent(this, SavedToDashboard::class.java))
+                    true
+                }
+                else -> false
+            }
+            handled
+        }
 
         val resultsTextView = findViewById<TextView>(R.id.resultsTextView)
         resultsTextView.text = "Results for: $searchQuery"
