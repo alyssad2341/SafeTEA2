@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safetea2.api.NewsRetrofitInstance
+import com.example.safetea2.api.OpenCageResponse
+import com.example.safetea2.api.OpenCageRetrofit
 import com.example.safetea2.model.NewsResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +25,7 @@ class UniversityDetailsActivity : AppCompatActivity() {
     private lateinit var newsAdapter: NewsListAdapter
 
     private val NEWS_API_KEY = "0c0f18806c974e70a3b75689291461fe"
+    private val OPENCAGE_API_KEY = "15b9a496e88a48e69906d2aa0542e5ce"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,7 @@ class UniversityDetailsActivity : AppCompatActivity() {
         val universityName = intent.getStringExtra("UNIVERSITY_NAME") ?: "Unknown University"
 
         val universityNameTextView = findViewById<TextView>(R.id.universityNameTextView)
+        val universityCityTextView = findViewById<TextView>(R.id.universityCityTextView)
         val saveButton = findViewById<Button>(R.id.saveButton)
         newsRecyclerView = findViewById(R.id.newsRecyclerView)
 
@@ -45,6 +49,7 @@ class UniversityDetailsActivity : AppCompatActivity() {
 
         setupRecyclerView()
         fetchNewsArticles(universityName)  // Correct function call
+        fetchCityofUniversity(universityName, universityCityTextView)
     }
 
     private fun saveUniversity(universityName: String) {
@@ -88,6 +93,28 @@ class UniversityDetailsActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
                 Toast.makeText(this@UniversityDetailsActivity, "Failed to fetch news", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun fetchCityofUniversity(universityName: String, cityTextView: TextView) {
+        val call = OpenCageRetrofit.api.getCityFromUniversity(universityName, OPENCAGE_API_KEY)
+
+        call.enqueue(object : Callback<OpenCageResponse> {
+            override fun onResponse(call: Call<OpenCageResponse>, response: Response<OpenCageResponse>) {
+                if (response.isSuccessful) {
+                    val city = response.body()?.results?.get(0)?.components?.city
+                    city?.let {
+                        cityTextView.text = "City: $it"
+                    } ?: run {
+                        cityTextView.text = "City not found"
+                    }
+                } else {
+                    cityTextView.text = "Error fetching city"
+                }
+            }
+
+            override fun onFailure(call: Call<OpenCageResponse>, t: Throwable) {
+                cityTextView.text = "Failed to fetch city"
             }
         })
     }
