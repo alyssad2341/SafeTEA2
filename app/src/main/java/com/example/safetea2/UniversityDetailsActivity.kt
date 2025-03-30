@@ -8,10 +8,21 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.safetea2.api.NewsRetrofitInstance
+import com.example.safetea2.model.NewsResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UniversityDetailsActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var newsRecyclerView: RecyclerView
+    private lateinit var newsAdapter: NewsListAdapter
+
+    private val NEWS_API_KEY = "0c0f18806c974e70a3b75689291461fe"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +32,7 @@ class UniversityDetailsActivity : AppCompatActivity() {
 
         val universityNameTextView = findViewById<TextView>(R.id.universityNameTextView)
         val saveButton = findViewById<Button>(R.id.saveButton)
+        newsRecyclerView = findViewById(R.id.newsRecyclerView)
 
         universityNameTextView.text = universityName
 
@@ -31,8 +43,9 @@ class UniversityDetailsActivity : AppCompatActivity() {
             Toast.makeText(this, "University saved successfully", Toast.LENGTH_SHORT).show()
         }
 
+        setupRecyclerView()
+        fetchNewsArticles(universityName)  // Correct function call
     }
-    //updated
 
     private fun saveUniversity(universityName: String) {
         val savedList = getSavedUniversities().toMutableList()
@@ -52,4 +65,30 @@ class UniversityDetailsActivity : AppCompatActivity() {
         return Gson().fromJson(json, type) ?: emptyList()
     }
 
+    private fun setupRecyclerView() {
+        newsRecyclerView.layoutManager = LinearLayoutManager(this)
+        newsAdapter = NewsListAdapter(emptyList())
+        newsRecyclerView.adapter = newsAdapter
+    }
+
+    private fun fetchNewsArticles(universityName: String) {
+
+        val query = "\"$universityName\""
+        val call = NewsRetrofitInstance.api.getUniversityNews(query, NEWS_API_KEY)
+
+        call.enqueue(object : Callback<NewsResponse> {
+            override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.articles?.let { articles ->
+                        val filteredArticles = articles.filter { it.title.contains(universityName, ignoreCase = true) }
+                        newsAdapter.updateArticles(filteredArticles)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
+                Toast.makeText(this@UniversityDetailsActivity, "Failed to fetch news", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
