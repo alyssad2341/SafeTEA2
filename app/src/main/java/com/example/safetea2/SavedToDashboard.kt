@@ -16,6 +16,8 @@ import android.content.Intent
 import android.widget.Button
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.safetea2.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -23,6 +25,7 @@ class SavedToDashboard : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var universityAdapter: UniversityListAdapter
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +40,24 @@ class SavedToDashboard : AppCompatActivity() {
 
         universityAdapter = UniversityListAdapter(savedUniversities.map { University(it) })
         recyclerView.adapter = universityAdapter
+
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        navView.setOnItemSelectedListener { item ->
+            val handled = when (item.itemId) {
+                R.id.navigation_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    // Redirect to SavedUniversitiesActivity when Dashboard is clicked
+                    true
+                }
+                else -> false
+            }
+            handled
+        }
+
     }
 
 

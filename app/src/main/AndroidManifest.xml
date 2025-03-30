@@ -31,6 +31,7 @@
             android:exported="false"
             android:label="Search Results" />
         <activity android:name=".UniversityDetailsActivity"/>
+        <activity android:name=".SavedToDashboard" />
     </application>
 <!-- update -->
 </manifest>

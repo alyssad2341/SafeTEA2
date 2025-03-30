@@ -25,14 +25,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        navView.setOnItemSelectedListener { item ->
+            val handled = when (item.itemId) {
+                R.id.navigation_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    // Redirect to SavedUniversitiesActivity when Dashboard is clicked
+                    startActivity(Intent(this, SavedToDashboard::class.java))
+                    true
+                }
+                else -> false
+            }
+            handled
+        }
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
 
         // Search Button Functionality (Moved Outside setOnItemSelectedListener)

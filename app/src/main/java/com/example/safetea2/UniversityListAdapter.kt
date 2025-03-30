@@ -13,7 +13,7 @@ class UniversityListAdapter(private var universities: List<University>) :
 
     class UniversityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.universityName)
-        val countryTextView: TextView = itemView.findViewById(R.id.universityCountry)
+        //val countryTextView: TextView = itemView.findViewById(R.id.universityCountry)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UniversityViewHolder {
@@ -24,7 +24,7 @@ class UniversityListAdapter(private var universities: List<University>) :
     override fun onBindViewHolder(holder: UniversityViewHolder, position: Int) {
         val university = universities[position]
         holder.nameTextView.text = university.name
-        holder.countryTextView.text = university.country
+        //holder.countryTextView.text = university.country
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
