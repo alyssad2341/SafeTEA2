@@ -58,6 +58,13 @@ class SavedToDashboard : AppCompatActivity() {
             handled
         }
 
+        val homeButton3 = findViewById<Button>(R.id.backbutton3)
+
+        homeButton3.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 

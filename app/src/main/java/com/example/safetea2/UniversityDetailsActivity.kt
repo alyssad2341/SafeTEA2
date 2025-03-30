@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import android.widget.Toast
+import android.content.Intent
 
 class UniversityDetailsActivity : AppCompatActivity() {
 
@@ -29,6 +30,13 @@ class UniversityDetailsActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveUniversity(universityName)
             Toast.makeText(this, "University saved successfully", Toast.LENGTH_SHORT).show()
+        }
+
+        val homeButton2 = findViewById<Button>(R.id.backbutton2)
+
+        homeButton2.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
